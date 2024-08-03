@@ -11,6 +11,10 @@ services:
     volumes:
         - /home/oskar/Bilder:/src:ro
         - thumbnail_images:/dst
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
   mobile_mapper:
     build:
       context: ./image-mapper
@@ -23,6 +27,10 @@ services:
     volumes:
         - /home/oskar/Bilder:/src:ro
         - mobile_images:/dst
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
   tv_mapper:
     build:
       context: ./image-mapper
@@ -35,6 +43,10 @@ services:
     volumes:
         - /home/oskar/Bilder:/src:ro
         - tv_images:/dst
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
   mobile_image_server:
     build:
       context: ./http-image-server
