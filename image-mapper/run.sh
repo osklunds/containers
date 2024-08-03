@@ -23,13 +23,21 @@ elif [[ -z "${QUALITY}" ]]; then
 elif [[ -z "${VIDEOS}" ]]; then
     die "VIDEOS env not set"
 
+elif [[ -z "${TIME}" ]]; then
+    die "TIME env not set"
+
 else
     if [[ "$VIDEOS" = "true" ]]; then
         videos="--include-videos"
     else
         videos=""
     fi
-    
-    exec "image_mapper" "$src" "$dst" "$QUALITY" "$videos" "--verbose"
+
+    while :
+    do
+        image_mapper "$src" "$dst" "$QUALITY" "$videos" --verbose
+        echo "Sleeping $TIME seconds before converting again"
+        sleep $TIME
+    done
 fi
 
