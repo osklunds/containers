@@ -29,13 +29,11 @@ elif [[ -z "${TIME}" ]]; then
 else
     if [[ "$VIDEOS" = "true" ]]; then
         videos="--include-videos"
-    else
-        videos=""
     fi
 
     while :
     do
-        image_mapper "$src" "$dst" "$QUALITY" "$videos" --verbose
+        image_mapper "$src" "$dst" "$QUALITY" $videos --verbose
         echo "Sleeping $TIME seconds before converting again"
         sleep $TIME
     done
