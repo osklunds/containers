@@ -1,20 +1,8 @@
 #!/bin/bash
 
-die () {
-    echo "$1"
-    exit 1
-}
+source ./common.sh
 
-thumbnail="/thumbnail"
-full="/full"
+check_paths
 
-if [[ ! -d "$thumbnail" ]]; then
-    die "thumbnail does not exist"
-
-elif [[ ! -d "$full" ]]; then
-    die "full does not exist"
-
-else
-    exec "HTTPImageServer" "$thumbnail" "$full" 80
-fi
+exec "HTTPImageServer" "/thumbnail" "/full" 80
 

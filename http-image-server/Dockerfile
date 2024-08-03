@@ -13,7 +13,12 @@ RUN cd dist-newstyle/build/*/ghc-9.10.1/HTTPImageServer-0.1.0.0/x/HTTPImageServe
  
 FROM debian:bookworm-slim
 COPY --from=builder /usr/src/HTTPImageServer.bin /usr/local/bin/HTTPImageServer
+RUN apt-get update -y && apt-get install -y curl
 COPY run.sh .
+COPY healthcheck.sh .
+COPY common.sh .
 CMD ["./run.sh"]
+
+HEALTHCHECK CMD "./healthcheck.sh"
 
 EXPOSE 80
