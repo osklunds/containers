@@ -6,4 +6,5 @@ RUN cargo install --locked --path .
 
 FROM debian:bookworm-slim
 COPY --from=builder /usr/local/cargo/bin/image_mapper /usr/local/bin/image_mapper
-CMD ["image_mapper"]
+COPY run.sh .
+CMD ["./run.sh"]
