@@ -1,2 +1,4 @@
 
+docker build --progress=plain -t image-mapper .
+
 docker run -it -e QUALITY=Thumbnail -e VIDEOS=true --mount type=bind,source=/home/oskar/Bilder,target=/src,readonly --mount type=volume,source=tv_conv,target=/dst image-mapper
