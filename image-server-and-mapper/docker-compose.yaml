@@ -1,5 +1,6 @@
 services:
   thumbnail_mapper:
+    image: image-mapper
     build:
       context: ./image-mapper
       dockerfile: Dockerfile
@@ -17,9 +18,7 @@ services:
           cpus: '0.25'
     init: true
   mobile_mapper:
-    build:
-      context: ./image-mapper
-      dockerfile: Dockerfile
+    image: image-mapper
     container_name: mobile_mapper
     environment:
       - QUALITY=Mobile
@@ -34,9 +33,7 @@ services:
           cpus: '0.25'
     init: true
   tv_mapper:
-    build:
-      context: ./image-mapper
-      dockerfile: Dockerfile
+    image: image-mapper
     container_name: tv_mapper
     environment:
       - QUALITY=TV
@@ -51,6 +48,7 @@ services:
         limits:
           cpus: '0.25'
   mobile_image_server:
+    image: image-server
     build:
       context: ./http-image-server
       dockerfile: Dockerfile
@@ -62,9 +60,7 @@ services:
       - 8080:80
     init: true
   tv_image_server:
-    build:
-      context: ./http-image-server
-      dockerfile: Dockerfile
+    image: image-server
     container_name: tv_image_server
     volumes:
       - thumbnail_images:/thumbnail
