@@ -5,4 +5,4 @@ docker run -it -e QUALITY=Thumbnail -e VIDEOS=true --mount type=bind,source=/hom
 
 docker run -it --mount type=volume,source=thumbnail_conv,target=/tv_conv debian:bookworm-slim bash
 
-docker compose up --build --remove-orphans
+docker compose up --build
