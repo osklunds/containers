@@ -1,5 +1,6 @@
 services:
   filmer_http_file_server:
+    image: http-file-server
     build:
       context: .
       dockerfile: Dockerfile
