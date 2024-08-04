@@ -7,7 +7,7 @@ COPY run.sh .
 
 RUN npm update && npm install http-server
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["./run.sh"]
 

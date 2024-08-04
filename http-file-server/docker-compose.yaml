@@ -1,0 +1,11 @@
+services:
+  filmer_http_file_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: filmer_http_file_server
+    volumes:
+      - /home/oskar/Bilder:/files:ro
+    ports:
+      - 8082:80
+    init: true
