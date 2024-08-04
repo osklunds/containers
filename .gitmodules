@@ -1,6 +1,0 @@
-[submodule "ImageMapper"]
-	path = ImageMapper
-	url = https://github.com/osklunds/ImageMapper.git
-[submodule "image-mapper/ImageMapper"]
-	path = image-mapper/ImageMapper
-	url = https://github.com/osklunds/ImageMapper.git
