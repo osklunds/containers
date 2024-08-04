@@ -33,6 +33,13 @@ else
 
     while :
     do
+        # sh -c 'exit 0' # test purposes
+        last_status="$?"
+
+        if [[ ! "$last_status" = "0" ]]; then
+            exit 1
+        fi
+
         image_mapper "$src" "$dst" "$QUALITY" $videos --verbose
         echo "Sleeping $TIME seconds before converting again"
         sleep $TIME
