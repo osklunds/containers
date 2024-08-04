@@ -12,6 +12,7 @@ services:
     volumes:
         - /home/oskar/Bilder:/src:ro
         - thumbnail_images:/dst
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -27,6 +28,7 @@ services:
     volumes:
         - /home/oskar/Bilder:/src:ro
         - mobile_images:/dst
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -42,11 +44,12 @@ services:
     volumes:
         - /home/oskar/Bilder:/src:ro
         - tv_images:/dst
-    init: true
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           cpus: '0.25'
+    init: true
   mobile_image_server:
     image: image-server
     build:
@@ -58,6 +61,7 @@ services:
       - mobile_images:/full
     ports:
       - 8080:80
+    restart: unless-stopped
     init: true
   tv_image_server:
     image: image-server
@@ -67,6 +71,7 @@ services:
       - tv_images:/full
     ports:
       - 8081:80
+    restart: unless-stopped
     init: true
 volumes:
   thumbnail_images:
