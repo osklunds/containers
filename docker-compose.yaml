@@ -15,6 +15,7 @@ services:
       resources:
         limits:
           cpus: '0.25'
+    init: true
   mobile_mapper:
     build:
       context: ./image-mapper
@@ -31,6 +32,7 @@ services:
       resources:
         limits:
           cpus: '0.25'
+    init: true
   tv_mapper:
     build:
       context: ./image-mapper
@@ -43,6 +45,7 @@ services:
     volumes:
         - /home/oskar/Bilder:/src:ro
         - tv_images:/dst
+    init: true
     deploy:
       resources:
         limits:
@@ -57,6 +60,7 @@ services:
       - mobile_images:/full
     ports:
       - 8080:80
+    init: true
   tv_image_server:
     build:
       context: ./http-image-server
@@ -67,6 +71,7 @@ services:
       - tv_images:/full
     ports:
       - 8081:80
+    init: true
 volumes:
   thumbnail_images:
   mobile_images:
