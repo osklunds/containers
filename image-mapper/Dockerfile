@@ -10,4 +10,8 @@ FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y procps
 COPY --from=builder /usr/local/cargo/bin/image_mapper /usr/local/bin/image_mapper
 COPY run.sh .
+COPY common.sh .
+COPY healthcheck.sh .
 CMD ["./run.sh"]
+
+HEALTHCHECK CMD "./healthcheck.sh"

@@ -1,48 +1,24 @@
 #!/bin/bash
 
-die () {
-    echo "$1"
-    exit 1
-}
+source ./common.sh
 
-src="/src"
-dst="/dst"
+check_config
 
-if [[ ! -d "$src" ]]; then
-    die "src does not exist"
+if [[ "$VIDEOS" = "true" ]]; then
+    videos="--include-videos"
+fi
 
-elif [[ -z "$( ls -A $src )" ]]; then
-    die "src is empty"
+while :
+do
+    # sh -c 'exit 1' # for testing
+    image_mapper "/src" "/dst" "$QUALITY" $videos --verbose
+    last_status="$?"
 
-elif [[ ! -d "$dst" ]]; then
-    die "dst does not exist"
-
-elif [[ -z "${QUALITY}" ]]; then
-    die "QUALITY env not set"
-
-elif [[ -z "${VIDEOS}" ]]; then
-    die "VIDEOS env not set"
-
-elif [[ -z "${TIME}" ]]; then
-    die "TIME env not set"
-
-else
-    if [[ "$VIDEOS" = "true" ]]; then
-        videos="--include-videos"
+    if [[ ! "$last_status" = "0" ]]; then
+        die "image_mapper command crashed"
     fi
 
-    while :
-    do
-        # sh -c 'exit 0' # test purposes
-        last_status="$?"
-
-        if [[ ! "$last_status" = "0" ]]; then
-            exit 1
-        fi
-
-        image_mapper "$src" "$dst" "$QUALITY" $videos --verbose
-        echo "Sleeping $TIME seconds before converting again"
-        sleep $TIME
-    done
-fi
+    echo "Sleeping $TIME seconds before converting again"
+    sleep $TIME
+done
 
