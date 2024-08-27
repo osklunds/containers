@@ -1,9 +1,11 @@
 
-FROM rust:1.63 as builder
+FROM rust:1.80 as builder
 WORKDIR /usr/src
-RUN git clone https://github.com/osklunds/ImageMapper.git
+# To cache crates index
+RUN cargo search regex
+RUN git clone https://github.com/osklunds/ImageMapper.git && \
+    (cd /usr/src/ImageMapper; git checkout 29f58f3a2e35540f7de3665b8be5ee272ab051c0)
 WORKDIR /usr/src/ImageMapper
-RUN git checkout e3573a8a7b3fbc16ca61b24c4423a3bf316589b6
 RUN cargo install --locked --path .
 
 FROM debian:bookworm-slim
